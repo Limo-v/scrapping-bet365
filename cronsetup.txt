@@ -1,0 +1,50 @@
+To set up and run a Python script using crontab in Ubuntu, follow these steps:
+
+1. Update and upgrade your system packages:
+
+sudo apt-get update
+sudo apt-get upgrade
+
+
+2. Install the cron service:
+
+sudo apt-get install cron
+
+
+3. Verify if the cron service is running:
+
+systemctl status cron
+
+
+4. Open the `runmypythonscript.sh` file and set the directory path to your project directory where the Python script is located. For example:
+
+# !/bin/bash
+cd /home/projects/Final # replace with your project directory
+. venv/bin/activate
+python3 crwbet365.py
+
+
+5. Set the appropriate permissions for the shell script and your project directory:
+
+sudo chmod a+x runmypythonscript.sh
+sudo chmod a+x /path/to/your/project # replace with your project directory
+
+
+6. Open the crontab file using the following command:
+
+crontab -e
+
+
+7. In the crontab file, add the following line to schedule the execution of your script every 10 minutes:
+
+*/10 * * * * /path/to/runmypythonscript.sh >> /path/to/cronlogs.log 2>&1 # replace with your project directory
+
+Make sure to replace `/path/to/runmypythonscript.sh` with the actual path to your `runmypythonscript.sh` file, and `/path/to/cronlogs.log` with the desired path to the log file where the script's output and errors will be logged.
+
+8. Save the crontab file and exit the editor.
+
+Now, your Python script will be executed automatically every 10 minutes based on the cron schedule you specified, and the script's output and errors will be logged in the specified log file (`cronlogs.log`).
+
+Remember to replace `/path/to/your/project` with the actual path to your project directory and `/usr/bin/python3` with the correct Python interpreter path if needed.
+
+Note: Make sure to adjust the paths and permissions according to your specific setup and file locations.
